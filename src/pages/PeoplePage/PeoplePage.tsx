@@ -21,6 +21,7 @@ type PeoplePageProps = {}
 
 const PeoplePage: React.FC<PeoplePageProps> = () => {
   const searchRef = useRef<HTMLInputElement>(null)
+  const inputValue = searchRef?.current?.value
 
   const dispatch = useDispatch()
   const peopleState = useSelector((state: RootState) => state.people)
@@ -123,7 +124,7 @@ const PeoplePage: React.FC<PeoplePageProps> = () => {
           aria-label='search'
           aria-describedby='search'
         />
-        <Button variant='outline-secondary' onClick={handleClear}>
+        <Button variant='outline-secondary' onClick={handleClear} disabled={!inputValue}>
           Clear
         </Button>
       </InputGroup>
