@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+
+.editable-plain {
+  $root: &;
+
+  &-input-group {
+    #{$root}-input {
+      width: 160px;
+      background: $--sw-input-background;
+      border-color: $--sw-input-border-color;
+    }
+  }
+}

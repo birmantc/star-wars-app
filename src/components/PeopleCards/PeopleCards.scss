@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.people-cards {
+  &-link {
+    text-decoration: none;
+  }
+
+  &-card:hover.bg-dark {
+    background-color: $--sv-captain-rex-blue-color !important;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  }
+}

@@ -1,0 +1,60 @@
+@import '../../styles/variables.scss';
+
+.person-page {
+  &-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: $--sw-person-container-background;
+    border-radius: 5px;
+    min-height: 500px;
+  }
+
+  &-spinner-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  &-spinner.text-light {
+    color: $--sv-captain-rex-blue-color !important;
+  }
+
+  &-top-panel {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: $--sw-person-property-base-color;
+  }
+
+  &-control-edit {
+    width: 100px;
+  }
+
+  &-attribute {
+    display: flex;
+    padding: 8px 0;
+    min-height: 31px;
+  }
+
+  &-label {
+    margin-right: 5px;
+    width: 160px;
+    color: $--sw-person-property-secondary-color;
+  }
+
+  &-value {
+    color: $--sw-person-property-base-color;
+  }
+
+  &-list {
+    color: $--sw-person-property-base-color;
+    margin-bottom: 0;
+    padding-left: 1rem;
+  }
+}

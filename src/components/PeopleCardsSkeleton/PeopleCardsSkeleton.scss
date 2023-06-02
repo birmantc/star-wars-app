@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+
+.people-cards-skeleton {
+  &-card-title {
+    overflow: hidden;
+    width: 70%;
+  }
+
+  &-card-skeleton-animation {
+    animation: skeletonBlink 1s infinite alternate;
+  }
+
+  &-card-skeleton-line {
+    height: 24px;
+    background-color: $--sv-captain-rex-blue-color;
+    border-radius: 3px;
+  }
+
+  @keyframes skeletonBlink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

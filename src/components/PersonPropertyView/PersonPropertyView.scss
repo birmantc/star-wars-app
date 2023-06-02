@@ -1,0 +1,18 @@
+@import '../../styles/variables.scss';
+
+.person-property-view {
+  &-value {
+    color: $--sw-person-property-base-color;
+    min-height: 31px;
+  }
+
+  &-list {
+    color: $--sw-person-property-base-color;
+    margin-bottom: 0;
+    padding-left: 1rem;
+  }
+
+  &-list-item {
+    min-height: 31px;
+  }
+}

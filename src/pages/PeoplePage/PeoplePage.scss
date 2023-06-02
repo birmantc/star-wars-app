@@ -1,0 +1,51 @@
+@import '../../styles/variables.scss';
+
+.people-page {
+  &-container {
+    margin-top: 60px;
+  }
+
+  .input-group &-search:focus {
+    color: #fff;
+    box-shadow: none;
+    border-color: var(--bs-border-color);
+  }
+
+  &-error-container,
+  &-spinner-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: $--sw-person-property-base-color;
+  }
+
+  &-pagination {
+    margin-top: 40px;
+  }
+
+  &-pagination-item {
+    & a {
+      color: #fff;
+      background-color: #343a40;
+      border-color: #343a40;
+    }
+
+    &.active a {
+      color: #000;
+      border-color: #000;
+    }
+  }
+}
+
+@keyframes skeletonAnimation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

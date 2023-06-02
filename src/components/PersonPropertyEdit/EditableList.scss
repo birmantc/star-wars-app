@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.editable-list {
+  $root: &;
+
+  &-list-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-edit-item {
+    display: flex;
+    margin-bottom: 5px;
+    align-items: center;
+
+    #{$root}-input {
+      width: 160px;
+      margin-right: 5px;
+      background: $--sw-input-background;
+      border-color: $--sw-input-border-color;
+    }
+  }
+
+  &-control {
+    width: 36px;
+  }
+}

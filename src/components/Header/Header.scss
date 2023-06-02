@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.header {
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+
+  &-logo {
+    height: 150px;
+    color: $--sv-dathomir-skies-color;
+  }
+}
