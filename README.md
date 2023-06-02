@@ -1,5 +1,7 @@
 # StarWars App
 
+[Link to the app](https://star-wars-app-mauve.vercel.app/)
+
 ## Development
 
 ```
