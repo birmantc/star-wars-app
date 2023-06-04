@@ -90,6 +90,14 @@ const PeoplePage: React.FC<PeoplePageProps> = () => {
       )
     }
 
+    if (!peopleState.data.count) {
+      return (
+        <div className={b('error-container', b('container'))}>
+          <h1 className={b('title')}>Nothing was found</h1>
+        </div>
+      )
+    }
+
     return (
       <div className={b('container')}>
         <PeopleCards people={peopleState.data.results} />
