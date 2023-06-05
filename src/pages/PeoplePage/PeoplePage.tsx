@@ -1,7 +1,7 @@
 import { cn } from '@bem-react/classname'
 import debounce from 'lodash/debounce'
 
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef, ChangeEventHandler, useCallback } from 'react'
 
 import { Pagination, InputGroup, Form, Button } from 'react-bootstrap'
 
@@ -23,14 +23,27 @@ const PeoplePage: React.FC<PeoplePageProps> = () => {
   const searchRef = useRef<HTMLInputElement>(null)
   const inputValue = searchRef?.current?.value
 
+  const pageRef = useRef<number>(1)
+  const setPage = useCallback((page: number) => {
+    pageRef.current = page
+  }, [])
+
   const dispatch = useDispatch()
   const peopleState = useSelector((state: RootState) => state.people)
 
-  const [page, setPage] = useState(1)
+  const resetPagination = useCallback(() => {
+    setPage(1)
+  }, [setPage])
 
+  const fetchAllPeople = useCallback(() => {
+    resetPagination()
+    dispatch(fetchPeople({ page: 1, query: '' }) as any)
+  }, [dispatch, resetPagination])
+
+  // Init fetching
   useEffect(() => {
-    dispatch(fetchPeople({ page, query: '' }) as any)
-  }, [page, dispatch])
+    fetchAllPeople()
+  }, [fetchAllPeople])
 
   useEffect(() => {
     if (searchRef.current) {
@@ -38,30 +51,31 @@ const PeoplePage: React.FC<PeoplePageProps> = () => {
     }
   }, [])
 
-  const handleChange = useRef(
+  // Fetching on search, need to reset pagination
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const query = event.target.value
+    resetPagination()
+    debounceFetchPeople(query)
+  }
+
+  const debounceFetchPeople = useRef(
     debounce((query: string) => {
-      dispatch(fetchPeople({ page, query }) as any)
+      dispatch(fetchPeople({ page: 1, query }) as any)
     }, 1000),
   ).current
 
-  useEffect(() => {
-    const inputElement = searchRef.current
-
-    if (inputElement) {
-      const eventListener = () => handleChange(inputElement.value)
-      inputElement.addEventListener('input', eventListener)
-
-      return () => {
-        inputElement.removeEventListener('input', eventListener)
-      }
-    }
-  }, [handleChange])
-
+  // Fetching on clear as initial fetching
   const handleClear = () => {
     if (searchRef.current) {
       searchRef.current.value = ''
-      dispatch(fetchPeople({ page, query: '' }) as any)
+      fetchAllPeople()
     }
+  }
+
+  // Fetching on paginate
+  const handlePaginate = (page: number) => {
+    setPage(page)
+    dispatch(fetchPeople({ page, query: inputValue || '' }) as any)
   }
 
   const renderContent = () => {
@@ -104,13 +118,13 @@ const PeoplePage: React.FC<PeoplePageProps> = () => {
         {(peopleState.data.next || peopleState.data.previous) && (
           <Pagination size='lg' className={b('pagination')}>
             {peopleState.data.previous && (
-              <Pagination.Prev className={b('pagination-item')} onClick={() => setPage(page - 1)} />
+              <Pagination.Prev className={b('pagination-item')} onClick={() => handlePaginate(pageRef.current - 1)} />
             )}
             <Pagination.Item className={b('pagination-item')} active>
-              {page}
+              {pageRef.current}
             </Pagination.Item>
             {peopleState.data.next && (
-              <Pagination.Next className={b('pagination-item')} onClick={() => setPage(page + 1)} />
+              <Pagination.Next className={b('pagination-item')} onClick={() => handlePaginate(pageRef.current + 1)} />
             )}
           </Pagination>
         )}
@@ -131,6 +145,7 @@ const PeoplePage: React.FC<PeoplePageProps> = () => {
           placeholder='R2-D2'
           aria-label='search'
           aria-describedby='search'
+          onChange={handleChange}
         />
         <Button variant='outline-secondary' onClick={handleClear} disabled={!inputValue}>
           Clear
