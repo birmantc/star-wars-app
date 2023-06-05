@@ -67,7 +67,7 @@ const PeoplePage: React.FC<PeoplePageProps> = () => {
   const renderContent = () => {
     if (peopleState.loading) {
       return (
-        <div className={b('container', b('container'))}>
+        <div className={b('container', b('container'))} data-testid='people-cards-skeleton'>
           <PeopleCardsSkeleton count={10} />
         </div>
       )
