@@ -14,7 +14,6 @@ function App() {
       <Routes>
         <Route path='/' element={withHeader(<PeoplePage />)} />
         <Route path='/people/:id' element={withHeader(<PersonPage />)} />
-        {/* <Route path='/*' element={<NotFoundPage />} /> */}
       </Routes>
     </Router>
   )
