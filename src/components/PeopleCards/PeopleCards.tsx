@@ -5,6 +5,8 @@ import Card from 'react-bootstrap/Card'
 
 import { Link } from 'react-router-dom'
 
+import swapi from '../../services/swapi'
+
 import type { PersonOverall } from '../../models'
 
 import './PeopleCards.scss'
@@ -20,13 +22,11 @@ const PeopleCards: React.FC<PeopleCardsProps> = ({ people }) => {
     <div className={b('container')}>
       <div className='row'>
         {people.map((person) => {
-          const match = person.url.match(/people\/(\d*)/)
+          const id = swapi.getIdByUrl(person.url)
 
-          if (!match) {
+          if (!id) {
             return null
           }
-
-          const id = match[1]
 
           return (
             <div className='col-md-4 mb-4' key={id}>

@@ -60,6 +60,12 @@ class Swapi {
 
     return data
   }
+
+  getIdByUrl(url: string): string | null {
+    const match = url.match(/people\/(\d*)/)
+
+    return match && match[1]
+  }
 }
 
 const swapi = new Swapi()
